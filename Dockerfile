@@ -35,28 +35,28 @@ RUN dnf install dnf-plugins-core -y \
     yum-utils \
     zlib
 
-RUN dnf remove -y docker \
-    docker-client \
-    docker-client-latest \
-    docker-common \
-    docker-latest \
-    docker-latest-logrotate \
-    docker-logrotate \
-    docker-engine \
-    podman \
-    runc
+# RUN dnf remove -y docker \
+#     docker-client \
+#     docker-client-latest \
+#     docker-common \
+#     docker-latest \
+#     docker-latest-logrotate \
+#     docker-logrotate \
+#     docker-engine \
+#     podman \
+#     runc
 
-RUN yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+# RUN yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
 
-RUN dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# RUN dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 RUN dnf clean all
 
-RUN systemctl enable docker.service containerd.service
+# RUN systemctl enable docker.service containerd.service
 
 # This is to mimic the OpenShift behaviour of adding the dynamic user to group 0.
-RUN useradd -G 0 $USERNAME \
-    && usermod -aG docker $USERNAME
+RUN useradd -G 0 $USERNAME
+# RUN usermod -aG docker $USERNAME
 ENV HOME=/home/${USERNAME}
 
 # Make and set the working directory
