@@ -58,7 +58,7 @@ RUN dnf clean all
 # This is to mimic the OpenShift behaviour of adding the dynamic user to group 0.
 RUN useradd -G ${GID} ${USERNAME}
 # RUN groupadd -g ${DOCKER_GROUP_GID} docker && usermod -aG ${DOCKER_GROUP_GID} $USERNAME
-RUN usermod -aG ${DOCKER_GROUP_GID} $USERNAME
+RUN usermod -aG docker $USERNAME
 ENV HOME=/home/${USERNAME}
 
 # Make and set the working directory
