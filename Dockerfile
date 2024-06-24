@@ -56,7 +56,7 @@ RUN dnf clean all
 # RUN systemctl enable docker.service containerd.service
 
 # This is to mimic the OpenShift behaviour of adding the dynamic user to group 0.
-RUN useradd -G ${GID}} $USERNAME
+RUN useradd -G ${GID} ${USERNAME}
 RUN groupadd -g ${DOCKER_GROUP_GID} docker && usermod -aG ${DOCKER_GROUP_GID} $USERNAME
 ENV HOME=/home/${USERNAME}
 
