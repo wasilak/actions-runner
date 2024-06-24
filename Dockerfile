@@ -17,6 +17,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV UID=1000
 ENV GID=0
 ENV USERNAME="runner"
+ENV DOCKER_GROUP_GID=123
 
 # Install software
 RUN dnf update -y
@@ -55,8 +56,8 @@ RUN dnf clean all
 # RUN systemctl enable docker.service containerd.service
 
 # This is to mimic the OpenShift behaviour of adding the dynamic user to group 0.
-RUN useradd -G 0 $USERNAME
-# RUN usermod -aG docker $USERNAME
+RUN useradd -G ${GID}} $USERNAME
+RUN groupadd -g ${DOCKER_GROUP_GID} docker && usermod -aG ${DOCKER_GROUP_GID} $USERNAME
 ENV HOME=/home/${USERNAME}
 
 # Make and set the working directory
